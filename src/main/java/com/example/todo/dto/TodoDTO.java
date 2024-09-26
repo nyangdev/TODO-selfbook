@@ -29,4 +29,14 @@ public class TodoDTO {
         this.writer = todoEntity.getWriter();
         this.dueDate = todoEntity.getDueDate();
     }
+
+    // dto를 엔티티 객체로 변환
+    public TodoEntity toEntity() {
+        return TodoEntity.builder()
+                .mno(mno)
+                .title(title)
+                .writer(writer)
+                .dueDate(dueDate)
+                .build();
+    }
 }
