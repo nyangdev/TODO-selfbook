@@ -1,11 +1,15 @@
 package com.example.todo.service;
 
+import com.example.todo.dto.PageRequestDTO;
 import com.example.todo.dto.TodoDTO;
 import com.example.todo.entity.TodoEntity;
 import com.example.todo.exception.EntityNotFoundException;
 import com.example.todo.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -69,5 +73,13 @@ public class TodoService {
         todoEntity.changeDueDate(todoDTO.getDueDate());
 
         return new TodoDTO(todoEntity);
+    }
+
+    public Page<TodoDTO> getList(PageRequestDTO pageRequestDTO) {
+
+        Sort sort = Sort.by("mno").descending();
+        Pageable pageable = pageRequestDTO.getPageable(sort);
+
+        return todoRepository.searchDTO(pageable);
     }
 }
