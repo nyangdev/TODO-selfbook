@@ -1,6 +1,8 @@
 package com.example.todo.dto;
 
 import com.example.todo.entity.TodoEntity;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,10 +18,13 @@ public class TodoDTO {
 
     private Long mno;
 
+    @NotEmpty // 문자열이 비어있지않을것
     private String title;
 
+    @NotEmpty
     private String writer;
 
+    @FutureOrPresent // 현재 혹은 미래
     private LocalDate dueDate;
 
     // TodoEntity의 데이터를 담을 수 있는 TodoDTO 클래스

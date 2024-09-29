@@ -1,5 +1,7 @@
 package com.example.todo.dto;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,9 +18,12 @@ import org.springframework.data.domain.Sort;
 public class PageRequestDTO {
 
     @Builder.Default
+    @Min(1)
     private int page = 1;
 
     @Builder.Default
+    @Max(100)
+    @Min(10)
     private int size = 10;
 
     public Pageable getPageable(Sort sort) {
